@@ -28,3 +28,20 @@ class Curso(models.Model):
     #representar o obj da classe "curso" como str do atributo 'descricao'
     def __str__(self):
         return self.descricao
+
+class Matricula(models.Model):
+    #Criando período novamente baseado na lógica "choices"
+    PERIODO = (
+        ('M','Matutino'),
+        ('V','Vespertino'),
+        ('N','Noturno')
+    )
+    #atributos vindos de outras classes/models => Aluno & Curso
+    '''
+    models.ForeignKey(classe, <other_methods>)
+    'on_delete= models.CASCADE' => quando a instância da classe/model aluno ou curso (um objeto aluno ou curso) for deletada, a matrícula relaciona a este aluno também será deletada.  
+    '''
+    aluno = models.ForeignKey(Aluno, on_delete= models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete= models.CASCADE)
+    #atributo de período
+    periodo = models.CharField(max_length=1, choices= PERIODO, blank= False, null= False, default= 'M')
