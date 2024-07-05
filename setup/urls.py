@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 #importar as viewsets
-from escola.views import AlunosViewSet, CursosViewSet, MatriculasViewSet, ListaMatriculasAluno
+from escola.views import AlunosViewSet, CursosViewSet, MatriculasViewSet, ListaMatriculasAluno,ListaAlunosMatriculados
 #importar rota default do django rest
 from rest_framework import routers
 
@@ -19,4 +19,5 @@ urlpatterns = [
     #pra um '' na url => redireciona o site para as rotas registradas no router  
     path('', include(router.urls)),
     path('aluno/<int:pk>/matriculas/', ListaMatriculasAluno.as_view()),
-]
+    path('curso/<int:pk>/matriculas/', ListaAlunosMatriculados.as_view()),
+]   
